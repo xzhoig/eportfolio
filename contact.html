@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Chan Kai Yip Nelson">
+  <meta name="keywords" content="e-portfolio, CV, AI and ICT student, Saint Francis University, web developer">
+  <meta name="author" content="Chan Kai Yip Nelson">
+  <title>Contact Me | Chan Kai Yip Nelson - e-Portfolio</title>
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ===== Header & navigation (same on every page) ===== -->
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html"><img src="images/logo.svg" alt="Chan Kai Yip Nelson logo" width="40" height="40"><span>Nelson Chan</span></a>
+      <nav aria-label="Main navigation">
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="experience.html">Experience</a></li>
+          <li><a href="education.html">Education</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+          <li><a href="sitemap.html">Site Map</a></li>
+        </ul>
+      </nav>
+      <div class="nav-tools">
+        <button type="button" class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">&#9790;</button>
+        <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-banner">
+      <div class="container">
+        <h1>Contact Me</h1>
+        <p>Interested in working with me? Send a message below.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container grid-2">
+        <!-- Contact details -->
+        <div class="card">
+          <h2 class="section-title">Get in Touch</h2>
+          <ul class="info-list">
+            <li><strong>Name:</strong> Chan Kai Yip Nelson</li>
+            <li><strong>Email:</strong> <a href="mailto:s25201381@mail.sfu.edu.hk">s25201381@mail.sfu.edu.hk</a></li>
+            <li><strong>University:</strong> Saint Francis University, Hong Kong</li>
+            <li><strong>Student ID:</strong> 25201381</li>
+          </ul>
+          <p class="muted" style="margin-top:1rem">I usually reply within 2 working days.</p>
+        </div>
+
+        <!-- Contact form with JavaScript validation (see js/script.js) -->
+        <div class="card">
+          <h2 class="section-title">Send a Message</h2>
+          <form id="contactForm" action="#" method="post" novalidate>
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" maxlength="40" placeholder="e.g. Wong Siu Ming" required>
+              <span class="error-msg" id="nameError"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="name@example.com" required>
+              <span class="error-msg" id="emailError"></span>
+            </div>
+            <div class="form-group">
+              <label for="phone">Telephone * (format 1234-5678)</label>
+              <input type="tel" id="phone" name="phone" placeholder="1234-5678" pattern="\d{4}-\d{4}" required>
+              <span class="error-msg" id="phoneError"></span>
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select id="subject" name="subject" required>
+                <option value="">-- Please select --</option>
+                <option value="job">Job opportunity</option>
+                <option value="internship">Internship</option>
+                <option value="freelance">Freelance project</option>
+                <option value="other">Other</option>
+              </select>
+              <span class="error-msg" id="subjectError"></span>
+            </div>
+            <div class="form-group">
+              <span style="font-weight:600;display:block;margin-bottom:0.3rem">Preferred contact method</span>
+              <div class="radio-row">
+                <label><input type="radio" name="method" value="email" checked> Email</label>
+                <label><input type="radio" name="method" value="phone"> Phone</label>
+                <label><input type="checkbox" name="cv" value="yes"> Please send me your CV</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Message * <small id="charCount" class="muted">0 / 500</small></label>
+              <textarea id="message" name="message" rows="5" maxlength="500" placeholder="Write your message (at least 10 characters)" required></textarea>
+              <span class="error-msg" id="messageError"></span>
+            </div>
+            <button type="submit" class="btn">Send Message</button>
+            <button type="reset" class="btn btn-outline">Clear</button>
+            <div class="form-result" id="formResult" role="status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <p>&copy; <span id="year">2026</span> Chan Kai Yip Nelson (Student ID 25201381) &middot; CIS222 Individual Assignment</p>
+      <p><a href="index.html">Home</a> <a href="experience.html">Experience</a> <a href="education.html">Education</a> <a href="skills.html">Skills</a> <a href="projects.html">Projects</a> <a href="contact.html">Contact</a> <a href="sitemap.html">Site Map</a></p>
+    </div>
+  </footer>
+  <button type="button" id="backToTop" aria-label="Back to top">&#8593;</button>
+  <script src="js/script.js"></script>
+</body>
+</html>

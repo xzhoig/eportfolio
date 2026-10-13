@@ -1,0 +1,290 @@
+/* =========================================================
+   style.css - External stylesheet for Chan Tai Man e-portfolio
+   CIS222/CIS282 Individual Assignment
+   Topics used: selectors, box model, flexbox, grid, table styling,
+   :hover / :focus / :active, transition, box-shadow, border-radius,
+   position / z-index, media queries (responsive)
+   ========================================================= */
+
+/* ---------- 1. Colour variables (light + dark theme) ---------- */
+:root {
+  --primary: #2980b9;
+  --primary-dark: #2c3e50;
+  --accent: #2ecc71;
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+  --shadow-hover: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+body.dark {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --border: #334155;
+  --shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- 2. Base / universal selector ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  transition: background-color 0.3s, color 0.3s;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--primary); }
+h1, h2, h3 { line-height: 1.25; }
+h2.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+  padding-left: 0.8rem;
+  border-left: 6px solid var(--primary);
+}
+.container { width: 92%; max-width: 1140px; margin: 0 auto; }
+section { padding: 3rem 0; }
+.muted { color: var(--muted); }
+
+/* ---------- 3. Header & navigation bar ---------- */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background-color: var(--card);
+  box-shadow: var(--shadow);
+}
+.nav-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 68px;
+}
+.brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--text); font-weight: 700; font-size: 1.15rem; }
+.brand img { width: 40px; height: 40px; }
+.nav-menu { list-style: none; display: flex; gap: 0.25rem; }
+.nav-menu a {
+  display: block; padding: 0.5rem 0.8rem; border-radius: 8px;
+  color: var(--text); text-decoration: none; font-weight: 500;
+  transition: background-color 0.25s, color 0.25s;
+}
+.nav-menu a:hover, .nav-menu a:focus { background-color: var(--primary); color: #fff; outline: none; }
+.nav-menu a.active { background-color: var(--primary-dark); color: #fff; }
+.nav-tools { display: flex; align-items: center; gap: 0.5rem; }
+
+/* Hamburger button (hidden on desktop) */
+.hamburger {
+  display: none; background: none; border: 2px solid var(--border);
+  border-radius: 8px; width: 44px; height: 40px; cursor: pointer;
+  flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+}
+.hamburger span { display: block; width: 22px; height: 3px; background-color: var(--text); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ---------- 4. Buttons (Tutorial 6: :hover, :focus, :active) ---------- */
+.btn {
+  display: inline-block; min-width: 120px; min-height: 44px;
+  padding: 0.65rem 1.3rem; border: 2px solid var(--primary);
+  border-radius: 10px; background-color: var(--primary); color: #fff;
+  font-size: 1rem; font-weight: 600; text-align: center; text-decoration: none;
+  cursor: pointer; box-shadow: 0 3px 8px rgba(41, 128, 185, 0.3);
+  transition: background-color 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+.btn:hover { background-color: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 8px 18px rgba(41, 128, 185, 0.4); }
+.btn:focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+.btn:active { transform: translateY(1px) scale(0.97); box-shadow: none; }
+.btn-outline { background-color: transparent; color: var(--primary); }
+.btn-outline:hover { color: #fff; }
+.btn-small { min-width: 0; min-height: 36px; padding: 0.35rem 0.8rem; font-size: 0.9rem; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--border);
+  background: var(--card); color: var(--text); font-size: 1.1rem; cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.icon-btn:hover { transform: rotate(20deg); border-color: var(--primary); }
+.icon-btn:focus { outline: 3px solid var(--accent); }
+
+/* ---------- 5. Hero / page banner ---------- */
+.hero {
+  background: url("../images/banner.jpg") center / cover no-repeat;
+  color: #fff; padding: 4rem 0;
+}
+.hero-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 2.5rem; align-items: center; }
+.profile-photo {
+  width: 260px; height: 260px; border-radius: 50%; object-fit: cover; margin: 0 auto;
+  border: 6px solid rgba(255,255,255,0.85); box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: transform 0.4s;
+}
+.profile-photo:hover { transform: scale(1.05) rotate(-2deg); }
+.hero h1 { font-size: 2.6rem; margin-bottom: 0.3rem; }
+.hero .tagline { font-size: 1.25rem; color: #bfdbfe; margin-bottom: 1rem; }
+.hero .typing { min-height: 1.6em; font-family: Consolas, monospace; color: #fde68a; margin-bottom: 1.4rem; }
+.hero .btn-outline { color: #fff; border-color: #fff; }
+.hero-buttons { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+.page-banner { background: url("../images/banner.jpg") center / cover; color: #fff; padding: 2.8rem 0; text-align: center; }
+.page-banner p { color: #bfdbfe; }
+
+/* ---------- 6. Cards & grids (DIV layout) ---------- */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+.card {
+  background-color: var(--card); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.5rem; box-shadow: var(--shadow);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+.card h3 { margin-bottom: 0.5rem; color: var(--primary); }
+.card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.stat { text-align: center; }
+.stat .num { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
+.info-list { list-style: none; }
+.info-list li { padding: 0.45rem 0; border-bottom: 1px dashed var(--border); }
+.info-list strong { display: inline-block; min-width: 110px; }
+.tag { display: inline-block; background: #dbeafe; color: #1e40af; padding: 0.2rem 0.65rem; border-radius: 999px; font-size: 0.82rem; margin: 0.15rem; }
+
+/* ---------- 7. Timeline (working experience) ---------- */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 4px; background: var(--primary); border-radius: 2px; }
+.timeline-item { position: relative; margin-bottom: 1.6rem; }
+.timeline-item::before {
+  content: ""; position: absolute; left: -2rem; top: 1.6rem; width: 20px; height: 20px;
+  border-radius: 50%; background: var(--card); border: 4px solid var(--primary);
+}
+.timeline-item .date { font-weight: 700; color: var(--accent); }
+
+/* ---------- 8. Tables (Education / Experience summary) ---------- */
+.table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow); }
+table.data-table { width: 100%; border-collapse: collapse; background: var(--card); min-width: 620px; }
+.data-table caption { caption-side: top; text-align: left; font-weight: 700; padding: 0.6rem 0; color: var(--muted); }
+.data-table th, .data-table td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+.data-table thead th { background-color: var(--primary); color: #fff; }
+.data-table tbody tr:nth-child(even) { background-color: rgba(41, 128, 185, 0.05); }
+.data-table tbody tr { transition: background-color 0.2s; }
+.data-table tbody tr:hover { background-color: rgba(245, 158, 11, 0.18); }
+
+/* ---------- 9. Skill bars ---------- */
+.skill { margin-bottom: 1.1rem; }
+.skill-head { display: flex; justify-content: space-between; font-weight: 600; }
+.skill-bar { height: 12px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.skill-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--primary), #06b6d4); border-radius: 999px; transition: width 1.4s ease-out; }
+
+/* ---------- 10. Accordion ---------- */
+.accordion-item { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.7rem; overflow: hidden; background: var(--card); }
+.accordion-header {
+  width: 100%; text-align: left; padding: 1rem 1.2rem; background: var(--card); color: var(--text);
+  border: none; font-size: 1.05rem; font-weight: 600; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; transition: background-color 0.25s;
+}
+.accordion-header:hover, .accordion-header:focus { background-color: rgba(41, 128, 185, 0.1); outline: none; }
+.accordion-header .sign { font-size: 1.4rem; transition: transform 0.3s; }
+.accordion-item.open .sign { transform: rotate(45deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding: 0 1.2rem; }
+.accordion-body p, .accordion-body ul { margin: 0.4rem 0 1rem; }
+.accordion-body ul { padding-left: 1.2rem; }
+
+/* ---------- 11. Image slider ---------- */
+.slider { position: relative; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-hover); }
+.slides { display: flex; transition: transform 0.6s ease; }
+.slides img { width: 100%; flex-shrink: 0; aspect-ratio: 2 / 1; object-fit: cover; }
+.slider-btn {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer;
+  background: rgba(255,255,255,0.8); font-size: 1.4rem; transition: background-color 0.25s, transform 0.2s;
+}
+.slider-btn:hover { background: #fff; transform: translateY(-50%) scale(1.12); }
+.slider-btn:active { transform: translateY(-50%) scale(0.95); }
+.slider-btn.prev { left: 14px; } .slider-btn.next { right: 14px; }
+.dots { position: absolute; bottom: 14px; width: 100%; display: flex; justify-content: center; gap: 8px; }
+.dot { width: 13px; height: 13px; border-radius: 50%; border: 2px solid #fff; background: transparent; cursor: pointer; transition: background-color 0.25s; }
+.dot.active, .dot:hover { background: #fff; }
+
+/* ---------- 12. Project gallery & filter ---------- */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.filter-btn.active { background-color: var(--primary-dark); color: #fff; }
+.project-card { padding: 0; overflow: hidden; }
+.project-card .thumb { overflow: hidden; }
+.project-card img { transition: transform 0.5s; aspect-ratio: 2 / 1; object-fit: cover; width: 100%; }
+.project-card:hover img { transform: scale(1.1); }
+.project-card .body { padding: 1.2rem; }
+.project-card.hide { display: none; }
+
+/* ---------- 13. Forms (Lecture 4 + Lecture 6 validation) ---------- */
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-weight: 600; margin-bottom: 0.3rem; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 0.7rem 0.9rem; border: 2px solid var(--border); border-radius: 8px;
+  font-size: 1rem; background: var(--card); color: var(--text); font-family: inherit;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--primary); box-shadow: 0 0 0 4px rgba(41, 128, 185, 0.2); outline: none;
+}
+.form-group input.invalid, .form-group textarea.invalid, .form-group select.invalid { border-color: #dc2626; }
+.form-group input.valid, .form-group textarea.valid, .form-group select.valid { border-color: #16a34a; }
+.error-msg { color: #dc2626; font-size: 0.85rem; min-height: 1.1em; display: block; }
+.radio-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.radio-row label { font-weight: 400; display: flex; align-items: center; gap: 0.35rem; }
+.radio-row input { width: auto; }
+.form-result { margin-top: 1rem; padding: 1rem; border-radius: 10px; display: none; }
+.form-result.success { display: block; background: #dcfce7; color: #166534; }
+
+/* ---------- 14. Site map ---------- */
+.sitemap-tree { list-style: none; }
+.sitemap-tree ul { list-style: none; margin-left: 1.6rem; border-left: 2px dashed var(--border); padding-left: 1rem; }
+.sitemap-tree li { margin: 0.45rem 0; }
+.sitemap-tree a { text-decoration: none; font-weight: 600; transition: color 0.2s, padding-left 0.2s; }
+.sitemap-tree a:hover { color: var(--accent); padding-left: 6px; }
+
+/* ---------- 15. Footer, back-to-top, toast ---------- */
+.site-footer { background: #0f172a; color: #cbd5e1; padding: 2rem 0; margin-top: 2rem; }
+.footer-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+.site-footer a { color: #93c5fd; text-decoration: none; margin-right: 0.8rem; }
+.site-footer a:hover { text-decoration: underline; color: #fff; }
+#backToTop {
+  position: fixed; right: 20px; bottom: 20px; z-index: 200; width: 48px; height: 48px;
+  border-radius: 50%; border: none; background: var(--primary); color: #fff; font-size: 1.4rem;
+  cursor: pointer; box-shadow: var(--shadow-hover); opacity: 0; visibility: hidden;
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+}
+#backToTop.show { opacity: 1; visibility: visible; }
+#backToTop:hover { transform: translateY(-4px); }
+.toast {
+  position: fixed; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(120px);
+  background: #0f172a; color: #fff; padding: 0.8rem 1.4rem; border-radius: 10px; z-index: 300;
+  transition: transform 0.4s;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ---------- 16. Responsive: tablet ---------- */
+@media (max-width: 992px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .hamburger { display: flex; }
+  .nav-menu {
+    position: absolute; top: 68px; left: 0; right: 0; flex-direction: column;
+    background: var(--card); box-shadow: var(--shadow); padding: 0 4%;
+    max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s;
+  }
+  .nav-menu.open { max-height: 480px; padding: 0.8rem 4%; }
+}
+/* ---------- 17. Responsive: mobile ---------- */
+@media (max-width: 600px) {
+  .hero-grid, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .hero { text-align: center; padding: 2.5rem 0; }
+  .hero h1 { font-size: 2rem; }
+  .hero-buttons { justify-content: center; }
+  .profile-photo { width: 190px; height: 190px; }
+  h2.section-title { font-size: 1.45rem; }
+  .brand span { display: none; }
+  .slider-btn { width: 36px; height: 36px; font-size: 1.1rem; }
+}
+/* Print-friendly CV */
+@media print {
+  .site-header, .site-footer, #backToTop, .slider-btn { display: none; }
+}
+.card .btn-small { margin-top: 0.8rem; }
+/* Darken the light mountain banner so white text stays readable */
+.hero, .page-banner { background-color: #2c3e50; background-blend-mode: multiply; }
